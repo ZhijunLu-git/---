@@ -1,0 +1,11 @@
+# 运行时自动生成的文件，不纳入版本管理
+运行日志.txt
+最近检测.txt
+*.log
+
+# 个人凭据：克隆后请在 config.json 里填自己的账号密码。
+# 注意：本仓库自带的 config.json 是占位符模板（不含真实密码）。
+# 如果你担心把填好的密码误提交，可改用下面方式：
+#   1) 把填好的命名为 config.local.json（已被忽略）
+#   2) 或执行: git update-index --skip-worktree config.json
+config.local.json

@@ -1,0 +1,36 @@
+{
+  "username": "在这里填你的学号",
+  "password": "在这里填你的密码",
+
+  "portal_type": "srun",
+
+  "srun": {
+    "base_url": "https://login.hdu.edu.cn",
+    "ac_id": "1",
+    "n": "200",
+    "type": "1",
+    "double_stack": "0",
+    "os": "Windows 10",
+    "name": "Windows"
+  },
+
+  "login": {
+    "url": "深澜门户用不到这一段，留着给其它认证系统用",
+    "method": "POST",
+    "content_type": "application/x-www-form-urlencoded",
+    "body_template": "userId={username}&password={password}&service=&queryString={queryString}&operatorPwd=&operatorUserId=&validcode=&passwordEncrypt=false",
+    "success_keyword": "success"
+  },
+
+  "check": {
+    "probe_url": "http://www.msftconnecttest.com/connecttest.txt",
+    "expected_content": "Microsoft Connect Test",
+    "timeout_seconds": 5,
+    "interval_seconds": 30
+  },
+
+  "retry": {
+    "max_attempts": 3,
+    "cooldown_seconds": 300
+  }
+}
