@@ -6,7 +6,7 @@
 
   "srun": {
     "base_url": "https://login.hdu.edu.cn",
-    "ac_id": "1",
+    "ac_id": "0",
     "n": "200",
     "type": "1",
     "double_stack": "0",

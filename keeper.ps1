@@ -224,9 +224,15 @@ function Invoke-SrunLogin {
     $n    = [string]$cfg.srun.n
     $type = [string]$cfg.srun.type
 
-    # ac_id 优先从认证页跳转地址里取，取不到用配置值
+    # ac_id 优先从认证页跳转地址里取，取不到用配置值。
+    # 杭电门户跳转地址形如 https://login.hdu.edu.cn/index_0.html，ac_id 编码在文件名里
+    # （index_<acid>.html），浏览器也是据此决定 ac_id；所以两种写法都要认：
+    #   1) 查询串 ?ac_id=数字   2) 文件名 index_数字.html
     $acid = [string]$cfg.srun.ac_id
-    if ($RedirectUrl -and ($RedirectUrl -match '(?i)ac_id=(\d+)')) { $acid = $Matches[1] }
+    if ($RedirectUrl) {
+        if     ($RedirectUrl -match '(?i)ac_id=(\d+)')       { $acid = $Matches[1] }
+        elseif ($RedirectUrl -match '(?i)index_(\d+)\.html') { $acid = $Matches[1] }
+    }
 
     $ts = [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds()
     $cb = 'jQuery112404953340710317085_' + $ts
