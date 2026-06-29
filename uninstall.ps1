@@ -1,4 +1,14 @@
 ﻿# uninstall.ps1 — 停止并删除两个计划任务（常驻主进程 + 看门狗）
+#
+# 这两个任务以 SYSTEM 身份注册，删除同样需要管理员权限；若未提权则自动以管理员身份重启（弹一次 UAC）。
+
+$wi = [Security.Principal.WindowsIdentity]::GetCurrent()
+if (-not (New-Object Security.Principal.WindowsPrincipal($wi)).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    Start-Process powershell.exe -Verb RunAs -ArgumentList @(
+        '-NoProfile','-ExecutionPolicy','Bypass','-File',('"{0}"' -f $PSCommandPath)
+    )
+    exit
+}
 
 foreach ($taskName in @('断网自动重连', '断网自动重连-看门狗')) {
     try { Stop-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue } catch {}
